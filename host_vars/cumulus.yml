@@ -1,3 +1,4 @@
+---
 system:
   hostname: cumulus01-leaf
 routing:
@@ -10,19 +11,23 @@ routing:
     redistribute:
       - prefix_lists:
           - name: SERVER_PREFIXES
+            entries:
               - cidr: 10.200.0.0/16
                 prefix: 30
                 operator: ge
 
- interfaces:
-   interswitch:
+interfaces:
+
+  interswitch:
     - name: swp1
       address: 10.2.2.1/31
       description: cisco switch
-    server:
-      - name: swp2
-        address: 10.200.1.2/31
-        description: server1
-    logical:
-      - name: lo
+
+  server:
+    - name: swp2
+      address: 10.200.1.2/31
+      description: server1
+
+  logical:
+    - name: lo
       address: "{{ routing.bgp.router-id }}/32"

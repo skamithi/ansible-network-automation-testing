@@ -1,3 +1,4 @@
+---
 system:
   hostname: juniper01-leaf
 
@@ -11,19 +12,23 @@ routing:
     redistribute:
       - prefix_lists:
           - name: SERVER_PREFIXES
+            entries:
               - cidr: 10.200.0.0/16
                 prefix: 30
                 operator: ge
 
- interfaces:
-   interswitch:
+interfaces:
+
+  interswitch:
     - name: em4
       address: 10.1.1.1/31
       description: cisco switch
-    server:
-      - name: em3
-        address: 10.200.1.0/31
-        description: server1
-    logical:
-      - name: lo
+
+  server:
+    - name: em3
+      address: 10.200.1.0/31
+      description: server1
+
+  logical:
+    - name: lo
       address: "{{ routing.bgp.router-id }}/32"
