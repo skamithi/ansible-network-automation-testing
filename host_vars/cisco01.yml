@@ -1,0 +1,27 @@
+---
+system:
+  hostname: cisco01-spine
+
+routing:
+  bgp:
+    asn: 65010
+    router_id: 10.100.1.1
+
+    neighbors:
+      - {ip: 10.2.2.1, asn: 65012}
+      - {ip: 10.1.1.1, asn: 65011}
+
+interfaces:
+  switch:
+
+    - name: Ethernet2/1
+      ipv4: 10.2.2.0/31
+      description: juniper switch
+
+    - name: Ethernet2/2
+      ipv4: 10.1.1.0/31
+      description: cumulus switch
+
+  logical:
+    - name: lo
+      address: "{{ routing.bgp.router_id }}/32"

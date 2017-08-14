@@ -1,0 +1,2 @@
+ansible_connection: local
+network_os: junos
