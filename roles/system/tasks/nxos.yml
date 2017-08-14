@@ -1,0 +1,11 @@
+---
+- name: Set hostname and domain name
+  nxos_system:
+    hostname: "{{ inventory_hostname }}"
+    domain_name: "{{ domain_name }}"
+
+- name: ensure ansible user exists
+  nxos_user:
+    name: ansible
+    sshkey: "{{ lookup('file', './keys/test_user.pub') }}"
+    role: network-admin

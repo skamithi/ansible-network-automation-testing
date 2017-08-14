@@ -1,0 +1,5 @@
+{% for iface in interfaces.switch %}
+interface {{ iface.name }}
+description {{ iface.description }}
+ip address {{ iface.ipv4 }}
+{% endfor %}

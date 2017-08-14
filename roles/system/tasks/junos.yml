@@ -1,0 +1,6 @@
+---
+# tasks file for roles/hostname
+- junos_system:
+    hostname: junos01
+    domain_name: test.example.com
+    provider: "{{ cli }}"
