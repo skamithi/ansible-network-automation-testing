@@ -1,0 +1,14 @@
+auto lo
+iface lo inet loopback
+   address {{ interfaces.loopback[0].ipv4 }}
+
+auto eth0
+iface eth0
+  address 192.168.1.202/24
+
+{% for item in interfaces.switch %}
+auto {{ item.name }}
+iface {{ item.name }}
+   address {{ item.ipv4 }}
+   alias {{ item.description }}
+{% endfor %}

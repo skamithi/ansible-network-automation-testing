@@ -1,0 +1,35 @@
+---
+- set_fact:
+    hostname_name: "{{ inventory_hostname }}"
+- set_fact:
+    hostname_fqdn: "{{ inventory_hostname }}.{{ domain_name }}"
+
+- name: Set hostname
+  nclu:
+    commands:
+      - "add hostname {{ inventory_hostname }}"
+    commit: true
+
+- name: Update /etc/hosts
+  lineinfile:
+    dest=/etc/hosts
+    regexp="^127\.0\.1\.1"
+    line="127.0.1.1{{'\t'}}{% if hostname_name != hostname_fqdn %}{{ hostname_fqdn }}{{'\t'}}{% endif %}{{ hostname_name }}"
+    state=present
+
+- name: create automation user
+  user:
+    name: "ansible"
+    shell: "/bin/bash"
+
+- name: add authorized_keys into automation account
+  authorized_key:
+    user: ansible
+    key: "{{ lookup('file', './keys/test_user.pub') }}"
+
+- name: Make automation user use password sudo
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: '^ansible'
+    line: 'ansible ALL=(ALL) NOPASSWD: ALL'
+    validate: "/usr/sbin/visudo -cf %s"

@@ -1,1 +1,2 @@
 network_os: cumulus
+ansible_become: true

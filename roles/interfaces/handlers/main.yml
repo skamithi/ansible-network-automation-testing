@@ -1,2 +1,4 @@
 ---
-# handlers file for roles/interfaces
+- name: run ifreload
+  shell: ifreload -a
+

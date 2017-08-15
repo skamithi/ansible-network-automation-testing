@@ -1,5 +1,0 @@
----
-dependencies:
-  - role: enable_netconf
-    when: network_os == 'junos'
-
