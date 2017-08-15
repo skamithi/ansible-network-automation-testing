@@ -1,0 +1,15 @@
+---
+- interface:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+
+  attributes:
+    interfaces:
+      type: list
+      value: "{{ interface }}"
+      items:
+        - "^(?P<name>[a-zA-Z0-9/]+)"
+        - "^admin state is (?P<state>)"
+    state_static:
+      value: present
+

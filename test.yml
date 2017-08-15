@@ -5,4 +5,5 @@
     - system
     - interfaces
     - bgp
+    - test_l2
 
