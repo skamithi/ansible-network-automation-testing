@@ -1,8 +1,0 @@
----
-- name: get show interface output
-  nxos_command:
-    commands: "show interface loopback 0"
-  register: iface_output
-
-- set_fact:
-    parseme: "{{ iface_output.stdout_lines| parse_cli('./spec/nxos/interface.yml') }}"

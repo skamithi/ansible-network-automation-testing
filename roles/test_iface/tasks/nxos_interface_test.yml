@@ -1,0 +1,17 @@
+---
+- name: get show interface output
+  nxos_command:
+    commands: "show interface {{ iface.name }}"
+  register: iface_output
+
+- name: facts from ethernet interface
+  set_fact:
+    iface_details: "{{ iface_output.stdout[0] | parse_cli_textfsm('./textfsm/nxos/cisco_nxos_show_interface.template') }}"
+
+- name: check that interface is up and IP is correctly assigned
+  assert:
+    that:
+      - "iface_details[0]['LINK_STATUS'] == 'up'"
+      - "iface_details[0]['IP_ADDRESS'] == '{{ iface.ipv4 }}'"
+    msg: "Failed"
+

@@ -1,0 +1,38 @@
+---
+# netshow l3 data structure for a single interface
+# "swp1": {
+#   "iface_obj": {
+#      "ip_address": {
+#          "allentries": [
+#              "10.2.2.1/31"
+#          ]
+#      },
+#  "linkstate": "UP",
+# }
+- name: grab iface info using netshow
+  command: 'netshow l3 --json'
+  register: iface_output
+
+
+- name: convert text output to json
+  set_fact:
+    iface_json:  "{{ iface_output.stdout | from_json }}"
+
+- name: check that Switch-to-Switch interface is up and IP address is correctly assigned
+  assert:
+    that:
+      - "iface_json['{{item.name }}'] is defined"
+      - "iface_json['{{ item.name }}']['iface_obj']['ip_address']['allentries']| join('') == '{{ item.ipv4 }}'"
+      - "iface_json['{{ item.name }}']['linkstate'] == 'UP'"
+    msg: "Leaf/Spine port {{ item.name }} on {{ inventory_hostname }} failed Interface test"
+  with_items: "{{ interfaces.switch }}"
+
+
+- name: check that Switch-to-Server interface is up and IP address is correctly assigned
+  assert:
+    that:
+      - "iface_json['{{item.name }}'] is defined"
+      - "iface_json['{{ item.name }}']['iface_obj']['ip_address']['allentries']| join('') == '{{ item.ipv4 }}'"
+      - "iface_json['{{ item.name }}']['linkstate'] == 'UP'"
+    msg: "Server port {{ item.name }} on {{ inventory_hostname }} failed Interface test"
+  with_items: "{{ interfaces.server }}"

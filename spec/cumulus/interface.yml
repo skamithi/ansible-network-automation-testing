@@ -1,0 +1,12 @@
+---
+interface:
+  key: "{{ item.name }}"
+  values:
+    mode: "{{ item.mode }}"
+    state: "{{ item.status }}"
+
+attributes:
+
+  interfaces:
+    value: "{{ interface }}"
+    items: "^(?P<name>Eth\\d+\\/\\d+)\\s+(?P<vlan>\\d+|--)\\s+(?P<type>\\w+)\\s+(?P<mode>\\w+)\\s+(?P<status>up|down)\\s+(?P<reason>.+)\\s+"
