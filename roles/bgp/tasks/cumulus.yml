@@ -1,0 +1,15 @@
+- name: create daemons file with bgp enabled
+  file:
+    src: cumulus_daemons.txt
+    dest: /etc/quagga/daemons
+    owner: quagga
+    group: quagga
+  notify: reload quagga
+
+- name: copy bgp config into quagga.conf
+  template:
+    src: cumulus_quagga.j2
+    dest: /etc/quagga/Quagga.conf
+    owner: quagga
+    group: quagga
+  notify: reload quagga

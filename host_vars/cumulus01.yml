@@ -8,13 +8,14 @@ routing:
     neighbors:
       - ip: 10.2.2.0
         asn: 65010
+
     redistribute:
-      - prefix_lists:
-          - name: SERVER_PREFIXES
-            entries:
-              - cidr: 10.200.0.0/16
-                prefix: 30
-                operator: ge
+      prefix_list:
+        name: SERVER_PREFIXES
+        entries:
+          - cidr: 10.200.0.0/16
+            prefix: 30
+            operator: ge
 
 interfaces:
 

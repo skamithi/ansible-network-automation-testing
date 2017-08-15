@@ -1,0 +1,4 @@
+---
+# handlers file for roles/bgp
+- name: reload quagga
+  service: name=quagga state=reloaded
