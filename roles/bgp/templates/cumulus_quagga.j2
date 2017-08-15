@@ -13,17 +13,21 @@ router bgp {{ routing.bgp.asn }}
   {% endfor %}
 !
 address-family ipv4 unicast
-{% if routing.bgp.redistribute is defined %}
-  redistribute connected route-map SERVERS
+  redistribute connected route-map CONNECTED
   exit-address-family
 !
+
+{% if routing.bgp.redistribute is defined %}
   {% for entry in routing.bgp.redistribute.prefix_list.entries %}
 ip prefix-list {{ routing.bgp.redistribute.prefix_list.name }} seq {{ loop.index }} permit {{ entry.cidr }}  {{ entry.operator }} {{ entry.prefix }}
   {% endfor %}
 !
-route-map SERVERS permit 10
+
+route-map CONNECTED permit 10
   match ip address prefix-list {{ routing.bgp.redistribute.prefix_list.name }}
+{% endif %}
+route-map CONNECTED permit 20
+  match interface lo
 !
-{%endif %}
  line vty
 !

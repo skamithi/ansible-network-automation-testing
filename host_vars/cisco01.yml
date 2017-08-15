@@ -6,7 +6,6 @@ routing:
   bgp:
     asn: 65010
     router_id: 10.100.1.1
-
     neighbors:
       - {ip: 10.2.2.1, asn: 65012}
       - {ip: 10.1.1.1, asn: 65011}
@@ -22,6 +21,6 @@ interfaces:
       ipv4: 10.1.1.0/31
       description: cumulus switch
 
-  logical:
-    - name: lo
-      address: "{{ routing.bgp.router_id }}/32"
+  loopback:
+    - name: "loopback 0"
+      ipv4: "{{ routing.bgp.router_id }}/32"
