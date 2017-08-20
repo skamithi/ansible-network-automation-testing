@@ -1,0 +1,17 @@
+set routing-options autonomous-system {{ routing.bgp.asn }}
+{# set routing-options autonomous-system {{ routing.bgp.router_id }} #}
+
+delete protocols bgp
+{% for entry in routing.bgp.neighbors %}
+set protocols bgp group external-peers type external export CONNECTED neighbor {{ entry.ip  }} peer-as {{ entry.asn }}
+
+{% endfor %}
+
+{% for prefix_list in routing.bgp.redistribute.prefix_lists %}
+delete policy-options prefix-list {{ prefix_list.name }}
+{% for entry in prefix_list.entries %}
+set policy-options prefix-list {{ prefix_list.name }} {{ entry.cidr }}
+{% endfor %}
+set policy-options policy-statement CONNECTED from protocol direct prefix-list-filter {{ prefix_list.name }}  longer
+set policy-options policy-statement CONNECTED then accept
+{% endfor %}

@@ -1,0 +1,16 @@
+{% for entry in interfaces.switch %}
+set interfaces {{ entry.name }} unit 0 family inet address {{ entry.ipv4 }}  primary preferred
+
+{% endfor %}
+
+{% for entry in interfaces.switch %}
+set interfaces {{ entry.name }} unit 0 family inet address {{ entry.ipv4 }}  primary preferred
+
+{% endfor %}
+
+{% for entry in interfaces.loopback %}
+set interfaces {{ entry.name }} unit 0 family inet address {{ entry.ipv4 }} primary preferred
+{% endfor %}
+
+{# enable LLDP #}
+set protocols lldp interface all

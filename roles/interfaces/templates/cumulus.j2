@@ -1,3 +1,4 @@
+
 auto lo
 iface lo inet loopback
    address {{ interfaces.loopback[0].ipv4 }}
@@ -12,3 +13,12 @@ iface {{ item.name }}
    address {{ item.ipv4 }}
    alias {{ item.description }}
 {% endfor %}
+
+{% for item in interfaces.server %}
+auto {{ item.name }}
+iface {{ item.name }}
+   address {{ item.ipv4 }}
+   alias {{ item.description }}
+{% endfor %}
+
+

@@ -1,2 +1,4 @@
+
+ansible_python_interpreter: /home/vagrant/ansible-dev/bin/python
 ansible_connection: local
 ansible_network_os: nxos

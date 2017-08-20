@@ -15,11 +15,11 @@ interfaces:
 
     - name: Ethernet2/1
       ipv4: 10.2.2.0/31
-      description: juniper switch
+      description: cumulus switch
 
     - name: Ethernet2/2
       ipv4: 10.1.1.0/31
-      description: cumulus switch
+      description: junos switch
 
   loopback:
     - name: "loopback 0"

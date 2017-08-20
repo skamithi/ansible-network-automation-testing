@@ -1,6 +1,15 @@
 ---
 # tasks file for roles/hostname
+- name: enable Junos Netconf
+  junos_netconf:
+
 - junos_system:
-    hostname: junos01
-    domain_name: test.example.com
+    hostname: "{{ inventory_hostname }}"
+    domain_name: "{{ domain_name }}"
     provider: "{{ cli }}"
+
+- name: set ansible user account
+  junos_user:
+    name: ansible
+    role: super-user
+    sshkey: "{{ lookup('file', './keys/test_user.pub') }}"

@@ -1,0 +1,5 @@
+---
+- name: configure interfaces
+  junos_config:
+    lines: "{{ lookup('template', 'junos.j2').split('\n') }}"
+    provider: "{{ cli }}"

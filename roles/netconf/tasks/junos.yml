@@ -1,2 +1,1 @@
-- name: enable Junos Netconf
-  junos_netconf:
+
