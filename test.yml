@@ -5,5 +5,6 @@
     - system
     - interfaces
     - bgp
-    - test_iface
+    - network_facts
+    #- test_iface
 

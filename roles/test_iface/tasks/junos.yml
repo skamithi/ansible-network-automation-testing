@@ -1,0 +1,7 @@
+---
+- name: get interface information from Junos
+  junos_rpc:
+    rpc: get-interface-information
+  register: iface-output
+
+- debug: var=iface-output

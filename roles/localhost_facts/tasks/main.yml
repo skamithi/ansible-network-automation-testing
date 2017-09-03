@@ -1,0 +1,2 @@
+- name: collect ansible proxy node facts regarding user dir
+  setup: filter="ansible_user*"
