@@ -1,7 +1,24 @@
 ---
-- name: get interface information from Junos
-  junos_rpc:
-    rpc: get-interface-information
-  register: iface-output
+- name: get junos interface facts
+  junos_facts:
+    gather_subset: interfaces
+  register: junos_interfaces
 
-- debug: var=iface-output
+
+- name: iterate over the interface and check state
+  assert:
+    that:
+      - "junos_interfaces.ansible_facts.ansible_net_interfaces['{{iface.name}}'].oper_status == 'up'"
+      - "junos_interfaces.ansible_facts.ansible_net_interfaces['{{iface.name}}'].interface_address[0].ip == '{{iface.ipv4}}'"
+  with_items: "{{ interfaces.switch }}"
+  loop_control:
+    loop_var: iface
+
+- name: iterate over interface facing servers
+  assert:
+    that:
+      - "junos_interfaces.ansible_facts.ansible_net_interfaces['{{iface.name}}'].oper_status == 'up'"
+      - "junos_interfaces.ansible_facts.ansible_net_interfaces['{{iface.name}}'].interface_address[0].ip == '{{iface.ipv4}}'"
+  with_items: "{{ interfaces.server }}"
+  loop_control:
+    loop_var: iface

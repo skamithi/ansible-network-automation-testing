@@ -1,5 +1,30 @@
 ---
+- name: create Junos temp directory location
+  file:
+    path: "{{ ansible_user_dir }}/.ansible/junos"
+    state: directory
+  changed_when: false
+
+- name: create tempfile where to house interfaces config
+  tempfile:
+    state: file
+    path: "{{ ansible_user_dir }}/.ansible/junos/"
+  register: routing_tmp_file
+  changed_when: false
+
+- name: >
+    copy routing config from the
+    template into the tempfile on the ansible server
+  template: src=junos.j2 dest="{{ routing_tmp_file.path }}"
+  changed_when: false
+
 - name: configure routing
   junos_config:
-    lines: "{{ lookup('template', 'junos.j2').split('\n') }}"
+    src: "{{ routing_tmp_file.path }}"
     provider: "{{ cli }}"
+
+- name: delete tmp files
+  file:
+    path: "{{ ansible_user_dir }}/.ansible/junos"
+    state: absent
+  changed_when: false
