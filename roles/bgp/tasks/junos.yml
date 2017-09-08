@@ -21,7 +21,6 @@
 - name: configure routing
   junos_config:
     src: "{{ routing_tmp_file.path }}"
-    provider: "{{ cli }}"
 
 - name: delete tmp files
   file:
