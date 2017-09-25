@@ -16,7 +16,7 @@ router bgp {{ routing.bgp.asn }}
   router-id  {{ routing.bgp.router_id }}
   address-family ipv4 unicast
     redistribute direct route-map CONNECTED
-  {% for entry in routing.bgp.neighbors %}
+{% for entry in routing.bgp.neighbors %}
   neighbor {{ entry.ip }} remote-as {{ entry.asn }}
     address-family ipv4 unicast
-  {% endfor %}
+{% endfor %}

@@ -1,0 +1,9 @@
+- name: get bgp output
+  nxos_command:
+    commands: 'show ip bgp'
+  register: bgp_output
+
+- name: parse bgp output
+  set_fact:
+    router_facts: "{{ bgp_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_ip_bgp_parser.yml')}}"
+

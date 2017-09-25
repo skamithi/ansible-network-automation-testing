@@ -2,4 +2,4 @@
 - name: bgp config for Nxos Router
   nxos_config:
     lines: "{{ lookup('template', 'nxos.j2').split('\r*\n*') }}"
-
+    match: none
