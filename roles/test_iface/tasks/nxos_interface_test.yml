@@ -6,12 +6,11 @@
 
 - name: facts from ethernet interface
   set_fact:
-    iface_details: "{{ iface_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_interface_parser.yml') }}"
+    nxos_interface: "{{ iface_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_interface_parser.yml') }}"
 
-  #- name: check that interface is up and IP is correctly assigned
-  #assert:
-  #  that:
-  #    - "iface_details[0]['LINK_STATUS'] == 'up'"
-  #    - "iface_details[0]['IP_ADDRESS'] == '{{ iface.ipv4 }}'"
-  #  msg: "Failed"
-
+- name: check that interface is up and IP is correctly assigned
+  assert:
+    that:
+      - "nxos_interface[0].link_protocol_state == 'up'"
+      - "nxos_interface[0].ipv4  == '{{ iface.ipv4 }}'"
+    msg: "NXOS interface {{ iface.name }} failed test. Is either not Up or IP address is not correct"

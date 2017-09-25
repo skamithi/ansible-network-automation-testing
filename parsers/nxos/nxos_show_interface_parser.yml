@@ -53,6 +53,22 @@
 # Schema Output
 # -------------
 #
+#[cisco01] => {
+#    "ansible_facts": {
+#        "nxos_interface": [
+#            {
+#                "admin_state": "up",
+#                "description": "port description is",
+#                "duplex": "full-duplex",
+#                "ipv4": "10.1.1.0/31",
+#                "link_protocol_state": "up",
+#                "mtu": 1500,
+#                "name": "Ethernet2/2",
+#                "port_mode": "routed"
+#            }
+#        ]
+#    },
+#
 vars:
   interface:
     name: "{{ item[0].name }}"
@@ -71,7 +87,7 @@ keys:
     end_block: ".+interface reset"
     items:
       - "^(?P<name>Ethernet.+) is (?P<oper>\\w+)"
-      - "\\s+Internet Address (.+)"
+      - "\\s+Internet Address is (.+)"
       - "\\s+ MTU (\\d+)"
       - "\\s+Port mode is (\\w+)"
       - "\\s+(\\w+-duplex)"
