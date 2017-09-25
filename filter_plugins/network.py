@@ -23,6 +23,7 @@ __metaclass__ = type
 import re
 import os
 import json
+import unittest
 
 from collections import Mapping
 
@@ -95,7 +96,6 @@ def parse_cli(output, tmpl):
             blocks = list()
             lines = None
             block_started = False
-
             for line in output.split('\n'):
                 match_start = start_block.match(line)
                 match_end = end_block.match(line)
@@ -238,3 +238,13 @@ class FilterModule(object):
 
     def filters(self):
         return self.filter_map
+
+
+class TextFilter(unittest.TestCase):
+    def testme(self):
+        output = "Ethernet2/2 is up\nadmin state is up, Dedicated Interface\n  Hardware:  Ethernet, address: 0000.0000.002f (bia 000f.819a.c502)\n  Description: port description is\n  Internet Address is 10.1.1.0/31\n  MTU 1500 bytes, BW 1000000 Kbit, DLY 10 usec\n  reliability 255/255, txload 1/255, rxload 1/255\n  Encapsulation ARPA, medium is broadcast\n  Port mode is routed\n  full-duplex, 1000 Mb/s\n  Beacon is turned off\n  Auto-Negotiation is turned off\n  Input flow-control is off, output flow-control is off\n  Auto-mdix is turned off\n  Switchport monitor is off \n  EtherType is 0x8100 \n  EEE (efficient-ethernet) : n/a\n  Last link flapped 02:39:41\n  Last clearing of \"show interface\" counters never\n  1 interface resets\n  Load-Interval #1: 0 seconds\n    0 seconds input rate 0 bits/sec, 0 packets/sec\n    0 seconds output rate 0 bits/sec, 0 packets/sec\n    input rate 0 bps, 0 pps; output rate 0 bps, 0 pps\n  Load-Interval #2: 0 seconds\n    0 seconds input rate 0 bits/sec, 0 packets/sec\n    0 seconds output rate 0 bits/sec, 0 packets/sec\n    input rate 0 bps, 0 pps; output rate 0 bps, 0 pps\n  RX\n    0 unicast packets  0 multicast packets  0 broadcast packets\n    0 input packets  0 bytes\n    0 jumbo packets  0 storm suppression packets\n    0 runts  0 giants  0 CRC/FCS  0 no buffer\n    0 input error  0 short frame  0 overrun   0 underrun  0 ignored\n    0 watchdog  0 bad etype drop  0 bad proto drop  0 if down drop\n    0 input with dribble  0 input discard\n    0 Rx pause\n  TX\n    0 unicast packets  0 multicast packets  0 broadcast packets\n    0 output packets  0 bytes\n    0 jumbo packets\n    0 output error  0 collision  0 deferred  0 late collision\n    0 lost carrier  0 no carrier  0 babble  0 output discard\n    0 Tx pause"
+        tmpl = "/home/vagrant/git/ansible-network-testing/parsers/nxos/nxos_show_interface_parser.yml"
+        parse_cli(output,tmpl)
+
+if __name__ == '__main__':
+    unittest.main()

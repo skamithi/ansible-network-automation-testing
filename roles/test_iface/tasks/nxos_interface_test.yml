@@ -6,9 +6,7 @@
 
 - name: facts from ethernet interface
   set_fact:
-    iface_details: "{{ iface_output.stdout[0] | parse_cli('./parsers/nxos/show_int_parser.yml') }}"
-
-- debug: var=iface_details
+    iface_details: "{{ iface_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_interface_parser.yml') }}"
 
   #- name: check that interface is up and IP is correctly assigned
   #assert:
