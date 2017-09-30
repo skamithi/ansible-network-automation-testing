@@ -7,3 +7,4 @@
     - bgp
     - test_iface
     - test_bgp
+    - test_vlan

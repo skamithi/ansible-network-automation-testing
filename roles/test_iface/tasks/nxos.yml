@@ -3,3 +3,12 @@
   with_items: "{{ interfaces.switch }}"
   loop_control:
     loop_var: iface
+
+    #- name: get show interface output
+    #nxos_command:
+    #commands: "show interface"
+    #register: ifaces_output
+
+    #- set_fact:
+    #nxos_ifacts: "{{ ifaces_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_interface_parser.yml') }}"
+
