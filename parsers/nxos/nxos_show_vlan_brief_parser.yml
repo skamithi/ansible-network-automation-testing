@@ -33,13 +33,14 @@
 # # Schema Output
 # -------------
 #
+#
 # ok: [cisco01] => {
 #     "ansible_facts": {
 #         "nxos_vlans": {
 #             "vlans": [
 #                 {
 #                     "id": 1,
-#                     "name": null,
+#                     "name": "default",
 #                     "ports": [
 #                         "Ethernet2/5"
 #                     ],
@@ -47,7 +48,7 @@
 #                 },
 #                 {
 #                     "id": 2,
-#                     "name": null,
+#                     "name": "VLAN0002",
 #                     "ports": [
 #                         "Ethernet2/4",
 #                         "Ethernet2/5"
@@ -56,7 +57,7 @@
 #                 },
 #                 {
 #                     "id": 3,
-#                     "name": null,
+#                     "name": "VLAN0003",
 #                     "ports": [
 #                         "Ethernet2/5"
 #                     ],
@@ -64,7 +65,7 @@
 #                 },
 #                 {
 #                     "id": 4,
-#                     "name": null,
+#                     "name": "VLAN0004",
 #                     "ports": [
 #                         "Ethernet2/5"
 #                     ],
@@ -72,7 +73,7 @@
 #                 },
 #                 {
 #                     "id": 5,
-#                     "name": null,
+#                     "name": "VLAN0005",
 #                     "ports": [
 #                         "Ethernet2/5"
 #                     ],
@@ -88,7 +89,7 @@
 vars:
   vlan:
     id: "{{ item.id }}"
-    name: "{{ item.oper }}"
+    name: "{{ item.name }}"
     status: "{{ item.status }}"
     ports: "{{ (item.ports|replace('Eth','Ethernet')).split(', ') }}"
 
