@@ -1,0 +1,10 @@
+---
+- name: get show interface output
+  nxos_command:
+    commands:
+      - "show vlan brief"
+  register: vlan_output
+
+- set_fact:
+    nxos_vlans: "{{ vlan_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_vlan_brief_parser.yml') }}"
+
