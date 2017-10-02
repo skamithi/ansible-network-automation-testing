@@ -1,5 +1,5 @@
 ---
-- name: get show interface output
+- name: get show vlan brief output
   nxos_command:
     commands:
       - "show vlan brief"
