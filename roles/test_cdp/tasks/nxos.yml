@@ -1,0 +1,30 @@
+---
+- name: get show cdp nei output
+  nxos_command:
+    commands:
+      - "show cdp nei detail"
+  register: cdp_output
+
+- name: get show lldp nei output
+  nxos_command:
+    commands:
+      - "show lldp nei"
+  register: lldp_output
+  ignore_errors: yes
+
+- name: create fact based on CDP neighbor details
+  set_fact:
+    nxos_cdp: "{{ cdp_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_cdp_nei_parser.yml') }}"
+
+- name: create a blank LLDP neighor detail list because nxos may not always have LLDP turned on
+  set_fact:
+    nxos_lldp: []
+
+- name:  Set LLDP neighbor detail list if it exists.
+  set_fact:
+    nxos_lldp: "{{ (lldp_output.stdout[0] | parse_cli('./parsers/nxos/nxos_show_lldp_nei_parser.yml')).neighbors }}"
+  when: lldp_output.stdout is defined
+
+- name:  combine LLDP and CDP neighbor detail list
+  set_fact:
+    nxos_neighbors: "{{ nxos_lldp + nxos_cdp }}"
