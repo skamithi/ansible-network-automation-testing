@@ -6,4 +6,4 @@
 
 - name: configure interfaces
   nxos_config:
-    lines: "{{ lookup('template', 'nxos.j2') }}"
+    src: 'nxos.j2'

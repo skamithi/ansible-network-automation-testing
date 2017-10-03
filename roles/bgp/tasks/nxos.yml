@@ -1,5 +1,8 @@
 ---
+- name: enable BGP feature
+  nxos_feature:
+    feature: bgp
+
 - name: bgp config for Nxos Router
   nxos_config:
-    lines: "{{ lookup('template', 'nxos.j2')}}"
-    match: none
+    src: 'nxos.j2'
