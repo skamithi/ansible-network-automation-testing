@@ -1,4 +1,9 @@
 ---
+- name: enable lldp feature
+  nxos_feature:
+    feature: lldp
+    state: enabled
+
 - name: configure interfaces
   nxos_config:
-    lines: "{{ lookup('template', 'nxos.j2').split('\r*\n*') }}"
+    lines: "{{ lookup('template', 'nxos.j2') }}"
