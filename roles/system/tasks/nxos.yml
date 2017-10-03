@@ -9,3 +9,8 @@
     name: ansible
     sshkey: "{{ lookup('file', './keys/test_user.pub') }}"
     role: network-admin
+
+- name: enable license grace period for BGP support on VIRL
+  nxos_config:
+    lines:
+      - "license grace-period"

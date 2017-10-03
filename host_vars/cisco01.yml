@@ -22,5 +22,5 @@ interfaces:
       description: junos switch
 
   loopback:
-    - name: "loopback 0"
+    - name: "loopback0"
       ipv4: "{{ routing.bgp.router_id }}/32"

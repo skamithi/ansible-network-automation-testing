@@ -1,18 +1,16 @@
-license grace-period
-!
 {% if routing.bgp.redistribute is defined %}
   {% for entry in routing.bgp.redistribute.prefix_list.entries %}
 ip prefix-list {{ routing.bgp.redistribute.prefix_list.name }} seq {{ loop.index }} permit {{ entry.cidr }}  {{ entry.operator }} {{ entry.prefix }}
   {% endfor %}
-!
+
 route-map CONNECTED permit 10
   match ip address prefix-list {{ routing.bgp.redistribute.prefix_list.name }}
 {% endif %}
 route-map CONNECTED permit 20
   match interface {{ interfaces.loopback[0].name }}
-!
+
 router bgp {{ routing.bgp.asn }}
-  router-id  {{ routing.bgp.router_id }}
+  router-id {{ routing.bgp.router_id }}
   address-family ipv4 unicast
     redistribute direct route-map CONNECTED
 {% for entry in routing.bgp.neighbors %}
