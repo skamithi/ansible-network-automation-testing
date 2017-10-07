@@ -1,0 +1,4 @@
+---
+system:
+  config:
+    hostname: arista01-leaf

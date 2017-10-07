@@ -1,0 +1,13 @@
+---
+- name: Set hostname and domain name
+  eos_system:
+    authorize: yes
+    hostname: "{{ system.config.hostname }}"
+    domain_name: "{{ system.config.domain_name }}"
+
+- name: ensure ansible user exists
+  eos_user:
+    authorize: yes
+    name: ansible
+    sshkey: "{{ lookup('file', './keys/test_user.pub') }}"
+    privilege: 15
