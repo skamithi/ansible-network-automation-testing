@@ -1,6 +1,7 @@
 ---
 system:
-  hostname: junos01-leaf
+  config:
+    hostname: junos01-leaf
 
 routing:
   bgp:

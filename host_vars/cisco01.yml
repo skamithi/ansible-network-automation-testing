@@ -1,6 +1,7 @@
 ---
 system:
-  hostname: cisco01-spine
+  config:
+    hostname: cisco01-spine
 
 routing:
   bgp:

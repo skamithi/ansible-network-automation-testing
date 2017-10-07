@@ -1,5 +1,7 @@
+system:
+  config:
+    domain_name: example.com
 ansible_user: ansible
-domain_name: test.example.com
 cli:
   transport: cli
   hostname: "{{ ansible_host }}"

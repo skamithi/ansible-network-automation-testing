@@ -1,6 +1,7 @@
 ---
 system:
-  hostname: cumulus01-leaf
+  config:
+    hostname: cumulus01-leaf
 routing:
   bgp:
     asn: 65012
