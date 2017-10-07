@@ -4,8 +4,8 @@
   junos_netconf:
 
 - junos_system:
-    hostname: "{{ inventory_hostname }}"
-    domain_name: "{{ domain_name }}"
+    hostname: "{{ system.config.hostname  }}"
+    domain_name: "{{ system.config.domain_name }}"
 
 - name: set ansible user account
   junos_user:
