@@ -19,16 +19,30 @@ routing:
               operator: ge
 
 interfaces:
-  switch:
-    - name: em4
-      ipv4: 10.1.1.1/31
-      description: cisco switch
-
-  server:
-    - name: em3
-      ipv4: 10.200.1.0/31
-      description: server1
-
-  loopback:
-    - name: lo0
-      ipv4: "{{ routing.bgp.router_id }}/32"
+  "em4":
+    switch_port_type: switch
+    config:
+      description: "cisco switch"
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "10.1.1.1/31"
+  "em3":
+    switch_port_type: server
+    config:
+      description: "server 1"
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "10.200.1.0/31"
+  "lo0":
+    switch_port_type: loopback
+    config:
+      description: loopback
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "{{ routing.bgp.router_id }}/32"

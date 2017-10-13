@@ -2,6 +2,7 @@
 cisco01 ansible_host=192.168.1.200
 cumulus01 ansible_host=192.168.1.202
 junos01 ansible_host=192.168.2.201
+arista01 ansible_host=192.168.1.203
 
 [nxos]
 cisco01
@@ -11,3 +12,6 @@ cumulus01
 
 [junos]
 junos01
+
+[eos]
+arista01

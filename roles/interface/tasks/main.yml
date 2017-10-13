@@ -1,4 +1,4 @@
 ---
 # tasks file for roles/interfaces
 - include_tasks:  "{{ ansible_network_os }}.yml"
-  tags: interfaces
+  tags: interface

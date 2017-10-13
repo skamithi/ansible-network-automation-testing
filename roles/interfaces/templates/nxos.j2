@@ -1,8 +1,0 @@
-interface loopback0
-  ip address {{ interfaces.loopback[0].ipv4 }}
-
-{% for iface in interfaces.switch %}
-interface {{ iface.name }}
-  description {{ iface.description }}
-  ip address {{ iface.ipv4 }}
-{% endfor %}

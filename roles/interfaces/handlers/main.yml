@@ -1,4 +1,0 @@
----
-- name: run ifreload
-  shell: ifreload -a
-

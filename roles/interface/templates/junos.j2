@@ -1,0 +1,31 @@
+interfaces {
+
+{% for iface_key, iface_value in interfaces.iteritems() %}
+    {{ iface_key }} {
+        description "{{ iface_value.config.description }}";
+{% for unit_number, unit_values in iface_value.config.subinterfaces.iteritems() %}
+        unit {{ unit_number }} {
+            family inet {
+{% for address in unit_values.ipv4.addresses %}
+{% if loop.index0 == 0 %}
+                address {{ address }} {
+                    primary;
+                }
+{% else %}
+                address {{ address }};
+{% endif %}
+            }
+{% endfor %}
+        }
+{% endfor %}
+    }
+{%endfor%}
+
+}
+
+protocols {
+   lldp {
+      port-id-subtype interface-name
+      interface all
+   }
+}

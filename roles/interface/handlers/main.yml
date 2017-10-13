@@ -1,7 +1,6 @@
 ---
-# handlers file for roles/bgp
-- name: reload quagga
-  service: name=quagga state=reloaded
+- name: run ifreload
+  shell: ifreload -a
 
 - name: save nxos config
   nxos_config:

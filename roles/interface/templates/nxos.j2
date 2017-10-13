@@ -1,0 +1,10 @@
+{% for iface_key, iface_value in interfaces.iteritems() %}
+interface {{ iface_key }}
+{% for address in iface_value.config.subinterfaces['0'].ipv4.addresses %}
+{% if loop.index0 == 0 %}
+  ip address {{ address }}
+{% else %}
+  ip address {{ address }} secondary
+{% endif %}
+{% endfor %}
+{% endfor %}

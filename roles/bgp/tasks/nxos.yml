@@ -6,3 +6,4 @@
 - name: bgp config for Nxos Router
   nxos_config:
     src: 'nxos.j2'
+  notify: save nxos config

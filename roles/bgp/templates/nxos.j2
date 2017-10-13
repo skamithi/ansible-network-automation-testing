@@ -6,7 +6,8 @@ ip prefix-list {{ routing.bgp.redistribute.prefix_list.name }} seq {{ loop.index
 route-map CONNECTED permit 10
   match ip address prefix-list {{ routing.bgp.redistribute.prefix_list.name }}
 {% endif %}
-route-map CONNECTED permit 20
+no route-map CONNECTED permit 20
+route-map CONNECTED permit 30
   match interface {{ interfaces.loopback[0].name }}
 
 router bgp {{ routing.bgp.asn }}

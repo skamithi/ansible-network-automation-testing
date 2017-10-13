@@ -12,16 +12,43 @@ routing:
       - {ip: 10.1.1.1, asn: 65011}
 
 interfaces:
-  switch:
+  "Ethernet2/1":
+    switch_port_type: switch
+    config:
+      description: "Cumulus Switch"
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "10.2.2.0/31"
 
-    - name: Ethernet2/1
-      ipv4: 10.2.2.0/31
-      description: cumulus switch
+  "Ethernet2/2":
+    switch_port_type: switch
+    config:
+      description: "Junos Switch"
+      subinterfaces:
+        "0":
+         ipv4:
+            addresses:
+              - "10.1.1.0/31"
 
-    - name: Ethernet2/2
-      ipv4: 10.1.1.0/31
-      description: junos switch
 
-  loopback:
-    - name: "loopback0"
-      ipv4: "{{ routing.bgp.router_id }}/32"
+  "Ethernet2/3":
+    switch_port_type: switch
+    config:
+      description: "Arista Switch"
+      subinterfaces:
+        "0":
+         ipv4:
+            addresses:
+              - "10.3.3.0/31"
+
+  "loopback0":
+    switch_port_type: loopback
+    config:
+      description: Loopback port
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "{{ routing.bgp.router_id}}/32"

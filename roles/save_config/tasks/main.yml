@@ -1,0 +1,4 @@
+---
+# tasks file for roles/save_config
+- include_tasks: "{{ ansible_network_os }}.yml"
+  tags: save_config

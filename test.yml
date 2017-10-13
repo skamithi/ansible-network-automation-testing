@@ -3,7 +3,7 @@
   gather_facts: false
   roles:
     - system
-    - interfaces
+    - interface
     - bgp
     - test_iface
     - test_bgp

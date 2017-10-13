@@ -7,3 +7,4 @@
 - name: configure interfaces
   nxos_config:
     src: 'nxos.j2'
+  notify: save nxos config
