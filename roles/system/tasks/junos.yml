@@ -6,6 +6,7 @@
 - junos_system:
     hostname: "{{ system.config.hostname  }}"
     domain_name: "{{ system.config.domain_name }}"
+    state: present
 
 - name: set ansible user account
   junos_user:

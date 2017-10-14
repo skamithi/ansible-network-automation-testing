@@ -1,8 +1,8 @@
 ---
 - set_fact:
-    hostname_name: "{{ inventory_hostname }}"
+    hostname_name: "{{ system.config.hostname }}"
 - set_fact:
-    hostname_fqdn: "{{ inventory_hostname }}.{{ domain_name }}"
+    hostname_fqdn: "{{ system.config.hostname }}.{{ system.config.domain_name }}"
 
 - name: Set hostname
   nclu:

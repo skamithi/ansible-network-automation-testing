@@ -3,6 +3,7 @@
   nxos_system:
     hostname: "{{ system.config.hostname }}"
     domain_name: "{{ system.config.domain_name }}"
+    state: present
 
 - name: ensure ansible user exists
   nxos_user:

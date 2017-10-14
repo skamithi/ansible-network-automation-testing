@@ -4,6 +4,7 @@
     authorize: yes
     hostname: "{{ system.config.hostname }}"
     domain_name: "{{ system.config.domain_name }}"
+    state: present
 
 - name: ensure ansible user exists
   eos_user:
