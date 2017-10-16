@@ -19,31 +19,38 @@ routing:
             operator: ge
 
 
-interfaces:
-  "swp1":
-    switch_port_type: switch
-    config:
-      description: "cisco switch"
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.2.2.1/31"
-  "swp2":
-    switch_port_type: server
-    config:
-      description: "server2"
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.200.1.2/31"
-  "lo":
-    switch_port_type: loopback
-    config:
-      description: loopback
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "{{ routing.bgp.router_id }}/32"
+openconfig_interfaces:
+  interface:
+    - name: "swp1"
+      switch_port_type: switch
+      config:
+        description: "cisco switch"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "10.2.2.1/31"
+    - name: "swp2"
+      switch_port_type: server
+      config:
+        description: "server2"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "10.200.1.2/31"
+    - name: "lo"
+      switch_port_type: loopback
+      config:
+        description: loopback
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "{{ routing.bgp.router_id }}/32"
