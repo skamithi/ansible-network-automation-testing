@@ -11,44 +11,53 @@ routing:
       - {ip: 10.2.2.1, asn: 65012}
       - {ip: 10.1.1.1, asn: 65011}
 
-interfaces:
-  "Ethernet2/1":
-    switch_port_type: switch
-    config:
-      description: "Cumulus Switch"
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.2.2.0/31"
+openconfig_interfaces:
+  interface:
+    - name: "Ethernet2/1"
+      switch_port_type: switch
+      config:
+        description: "Cumulus Switch"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "10.2.2.0/31"
 
-  "Ethernet2/2":
-    switch_port_type: switch
-    config:
-      description: "Junos Switch"
-      subinterfaces:
-        "0":
-         ipv4:
-            addresses:
-              - "10.1.1.0/31"
+    - name: "Ethernet2/2"
+      switch_port_type: switch
+      config:
+        description: "Junos Switch"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "10.1.1.0/31"
 
 
-  "Ethernet2/3":
-    switch_port_type: switch
-    config:
-      description: "Arista Switch"
-      subinterfaces:
-        "0":
-         ipv4:
-            addresses:
-              - "10.3.3.0/31"
+    - name: "Ethernet2/3"
+      switch_port_type: switch
+      config:
+        description: "Arista Switch"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - "10.3.3.0/31"
 
-  "loopback0":
-    switch_port_type: loopback
-    config:
-      description: Loopback port
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "{{ routing.bgp.router_id}}/32"
+    - name: "loopback0"
+      switch_port_type: loopback
+      config:
+        description: Loopback port
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - "{{ routing.bgp.router_id}}/32"
