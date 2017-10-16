@@ -1,18 +1,18 @@
 interfaces {
 
-{% for iface_key, iface_value in interfaces.iteritems() %}
-    {{ iface_key }} {
-        description "{{ iface_value.config.description }}";
-{% for unit_number, unit_values in iface_value.config.subinterfaces.iteritems() %}
-        unit {{ unit_number }} {
+{% for iface in openconfig_interfaces.interface %}
+    {{ iface.name }} {
+        description "{{ iface.config.description }}";
+{% for unit in iface.config.subinterfaces.subinterface %}
+        unit {{ unit.index }} {
             family inet {
-{% for address in unit_values.ipv4.addresses %}
+{% for address in unit.ipv4.addresses.address %}
 {% if loop.index0 == 0 %}
-                address {{ address }} {
+                address {{ address.ip }} {
                     primary;
                 }
 {% else %}
-                address {{ address }};
+                address {{ address.ip }};
 {% endif %}
             }
 {% endfor %}
