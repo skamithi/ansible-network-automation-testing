@@ -1,0 +1,14 @@
+{% for iface in openconfig_interfaces.interface %}
+interface {{ iface.name }}
+{% if iface.config.description is defined %}
+  description {{ iface.config.description }}
+{% endif %}
+{% set subints = iface.config.subinterfaces.subinterface %}
+{% for address in subints[0].ipv4.addresses.address if loop.first %}
+{% if loop.index0 == 0 %}
+  ip address {{ address.ip }}
+{% else %}
+  ip address {{ address.ip }} secondary
+{% endif %}
+{% endfor %}
+{% endfor %}

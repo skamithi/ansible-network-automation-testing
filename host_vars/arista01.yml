@@ -2,3 +2,49 @@
 system:
   config:
     hostname: arista01-leaf
+routing:
+  bgp:
+    asn: 65014
+    router_id: 10.100.1.4
+    neighbors:
+      - {ip: 10.3.3.0, asn: 65010}
+      - {ip: 10.1.1.1, asn: 65011}
+
+openconfig_interfaces:
+  interface:
+    - name: "Ethernet1"
+      switch_port_type: switch
+      config:
+        description: "Cisco Switch"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "10.3.3.1/31"
+
+    - name: "Ethernet2"
+      switch_port_type: server
+      config:
+        description: "Server3"
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - ip: "10.200.1.4/31"
+
+
+    - name: "Loopback0"
+      switch_port_type: loopback
+      config:
+        description: Loopback port
+        subinterfaces:
+          subinterface:
+            - index: 0
+              ipv4:
+                addresses:
+                  address:
+                    - "{{ routing.bgp.router_id}}/32"

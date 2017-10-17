@@ -1,0 +1,5 @@
+- name: configure interfaces
+  eos_config:
+    src: 'eos.j2'
+    authorize: yes
+  notify: save eos config

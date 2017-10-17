@@ -9,3 +9,11 @@
       - "^mac-address"
     save_when: modified
   diff: yes
+
+- name: save eos config
+  eos_config:
+    diff_against: startup
+    diff_ignore_lines:
+    save_when: modified
+    authorize: yes
+  diff: yes

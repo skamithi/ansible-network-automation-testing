@@ -5,11 +5,12 @@ system:
 
 routing:
   bgp:
-    asn: 65010
-    router_id: 10.100.1.1
+    asn: 65013
+    router_id: 10.100.1.4
     neighbors:
       - {ip: 10.2.2.1, asn: 65012}
       - {ip: 10.1.1.1, asn: 65011}
+      - {ip: 10.3.3.1, asn: 65014}
 
 openconfig_interfaces:
   interface:
