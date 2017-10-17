@@ -1,3 +1,16 @@
+- name: check if lldp is running
+  eos_command:
+    commands: "show lldp"
+  register: show_lldp_output
+
+- name: enable lldp
+  eos_config:
+    lines:
+      - lldp run
+    authorize: yes
+  notify: save eos config
+  when: "{{ 'LLDP is not enabled' in show_lldp_output.stdout[0] }}"
+
 - name: configure interfaces
   eos_config:
     src: 'eos.j2'
