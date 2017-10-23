@@ -19,7 +19,7 @@ routing:
               operator: ge
 
 interfaces:
-  "em4":
+  "xe-0/0/1":
     switch_port_type: switch
     config:
       description: "cisco switch"
@@ -28,7 +28,7 @@ interfaces:
           ipv4:
             addresses:
               - "10.1.1.1/31"
-  "em3":
+  "xe-0/0/0":
     switch_port_type: server
     config:
       description: "server 1"
@@ -45,4 +45,4 @@ interfaces:
         "0":
           ipv4:
             addresses:
-              - "{{ routing.bgp.router_id }}/32"
+              - "10.100.1.2"
