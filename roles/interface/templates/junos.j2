@@ -4,7 +4,7 @@ interfaces {
     {{ iface_key }} {
         description "{{ iface_value.config.description }}";
         unit 0 {
-            family inet {
+            replace: family inet {
 {% for address in iface_value.config.ipv4.addresses %}
 {% if loop.index0 == 0 %}
                 address {{ address }} {
