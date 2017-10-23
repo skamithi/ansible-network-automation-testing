@@ -3,10 +3,9 @@ interfaces {
 {% for iface_key, iface_value in interfaces.iteritems() %}
     {{ iface_key }} {
         description "{{ iface_value.config.description }}";
-{% for unit_number, unit_values in iface_value.config.subinterfaces.iteritems() %}
-        unit {{ unit_number }} {
+        unit 0 {
             family inet {
-{% for address in unit_values.ipv4.addresses %}
+{% for address in iface_value.config.ipv4.addresses %}
 {% if loop.index0 == 0 %}
                 address {{ address }} {
                     primary;
@@ -17,7 +16,6 @@ interfaces {
             }
 {% endfor %}
         }
-{% endfor %}
     }
 {%endfor%}
 

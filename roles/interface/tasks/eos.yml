@@ -9,7 +9,7 @@
       - lldp run
     authorize: yes
   notify: save eos config
-  when: "{{ 'LLDP is not enabled' in show_lldp_output.stdout[0] }}"
+  when: " 'LLDP is not enabled' in show_lldp_output.stdout[0] "
 
 - name: configure interfaces
   eos_config:

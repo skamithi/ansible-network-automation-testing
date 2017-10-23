@@ -11,9 +11,7 @@ iface eth0
 auto {{ iface_key }}
 iface {{ iface_key }}
     alias "{{ iface_value.config.description }}";
-{% for unit_number, unit_values in iface_value.config.subinterfaces.iteritems() %}
-{% for address in unit_values.ipv4.addresses %}
+{% for address in iface_value.config.ipv4.addresses %}
     address {{ address }}
 {%endfor %}
-{%endfor%}
 {%endfor%}
