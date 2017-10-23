@@ -7,13 +7,13 @@ iface eth0
   address 192.168.1.202/24
 
 
-{% for iface in openconfig_interfaces.interface %}
-auto {{ iface.name }}
-iface {{ iface.name }}
-    alias "{{ iface.config.description }}";
-{% for unit in iface.config.subinterfaces.subinterface %}
-{% for address in unit.ipv4.addresses.address %}
-    address {{ address.ip }}
+{% for iface_key, iface_value in interfaces.iteritems() %}
+auto {{ iface_key }}
+iface {{ iface_key }}
+    alias "{{ iface_value.config.description }}";
+{% for unit_number, unit_values in iface_value.config.subinterfaces.iteritems() %}
+{% for address in unit_values.ipv4.addresses %}
+    address {{ address }}
 {%endfor %}
 {%endfor%}
 {%endfor%}

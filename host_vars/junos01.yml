@@ -17,40 +17,32 @@ routing:
             - cidr: 10.200.0.0/16
               prefix: 30
               operator: ge
-openconfig_interfaces:
-  interface:
-    - name: "em4"
-      switch_port_type: switch
-      config:
-        description: "Cisco Switch"
-        subinterfaces:
-          subinterface:
-            - index: 0
-              ipv4:
-                addresses:
-                  address:
-                    - ip: "10.1.1.0/31"
 
-    - name: "em3"
-      switch_port_type: switch
-      config:
-        description: "server 1"
-        subinterfaces:
-          subinterface:
-            - index: 0
-              ipv4:
-                addresses:
-                  address:
-                    - ip: "10.200.1.0/31"
-
-    - name: "lo0"
-      switch_port_type: loopback
-      config:
-        description: "loopback"
-        subinterfaces:
-          subinterface:
-            - index: 0
-              ipv4:
-                addresses:
-                  address:
-                    - ip: "{{ routing.bgp.router_id }}/32"
+interfaces:
+  "em4":
+    switch_port_type: switch
+    config:
+      description: "cisco switch"
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "10.1.1.1/31"
+  "em3":
+    switch_port_type: server
+    config:
+      description: "server 1"
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "10.200.1.0/31"
+  "lo0":
+    switch_port_type: loopback
+    config:
+      description: loopback
+      subinterfaces:
+        "0":
+          ipv4:
+            addresses:
+              - "{{ routing.bgp.router_id }}/32"
