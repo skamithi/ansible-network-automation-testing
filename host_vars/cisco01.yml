@@ -17,39 +17,31 @@ interfaces:
     switch_port_type: switch
     config:
       description: "Cumulus Switch"
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.2.2.0/31"
+      ipv4:
+        addresses:
+          - "10.2.2.0/31"
 
   "Ethernet2/2":
     switch_port_type: switch
     config:
       description: "Junos Switch"
-      subinterfaces:
-        "0":
-         ipv4:
-            addresses:
-              - "10.1.1.0/31"
+     ipv4:
+        addresses:
+          - "10.1.1.0/31"
 
 
   "Ethernet2/3":
     switch_port_type: switch
     config:
       description: "Arista Switch"
-      subinterfaces:
-        "0":
-         ipv4:
-            addresses:
-              - "10.3.3.0/31"
+     ipv4:
+        addresses:
+          - "10.3.3.0/31"
 
   "loopback0":
     switch_port_type: loopback
     config:
       description: Loopback port
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.100.1.4/32"
+      ipv4:
+        addresses:
+          - "10.100.1.4/32"

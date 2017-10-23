@@ -15,26 +15,20 @@ interfaces:
     switch_port_type: switch
     config:
       description: "cisco switch"
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.3.3.1/31"
+      ipv4:
+        addresses:
+          - "10.3.3.1/31"
   "Ethernet2":
     switch_port_type: server
     config:
       description: "server3"
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.200.1.4/31"
+      ipv4:
+        addresses:
+          - "10.200.1.4/31"
   "Loopback0":
     switch_port_type: loopback
     config:
       description: loopback
-      subinterfaces:
-        "0":
-          ipv4:
-            addresses:
-              - "10.100.1.5/32"
+      ipv4:
+        addresses:
+          - "10.100.1.5/32"
